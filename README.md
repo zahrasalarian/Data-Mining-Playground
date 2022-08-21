@@ -52,3 +52,59 @@ This project aims to cluster the [make_blobs](https://scikit-learn.org/stable/mo
 
 ## Diabetes Classifier
 
+In this project, a Diabetes Classifier was developed to predict whether a new given case is diabetic. The used dataset consists of more than 70,000 records of patients who have filled out the questionnaire designed by the Centers for Disease Control and Prevention (CDC). It has 22 columns listed below:  
+- Diabetes_binary: The target column that determines whether a person has diabetes or pre-diabetes  
+- HighBP
+- High Cholesterol
+- Cholesterol Check
+- BMI
+- Smoker
+- Stroke
+- HeartDiseaseorAttack
+- Physical Activity
+- Fruits
+- Veggies
+- Heavy Alcohol Consumption
+- Any Health Care
+- No Doctor because of Cost
+- General Health
+- Mental Health
+- Physical Health
+- Difficulty Walking
+- Sex
+- Age
+- Education
+- Income
+
+The [XGBoost](https://xgboost.readthedocs.io/en/stable/) or Extreme Gradient Boost was used to implement the classifier. But before moving on to that, the preprocessing steps are listed in the following:  
+- Handle Missing Values 
+    - Impute missing continuous values with Mean
+    - Impute missing categorical values with the most frequent category
+- Replace white spaces in columns' names with '_'
+- Normalizing/Scaling
+- One-hot-encoding
+
+In the next step, we design and train an XGBoost classifier with such architecture as below:  
+
+```
+model = XGBClassifier(
+            learning_rate=0.1, 
+            max_depth=4, 
+            n_estimators=200, 
+            subsample=0.5, 
+            colsample_bytree=1, 
+            random=123, 
+            eval_metric='auc', 
+            verbosity=1, 
+            tree_method='gpu_hist', 
+            early_stop=10)
+```
+And finally, to obtain the best combination of hyperparameters, we employ GridSearchCV on the following values for each parameter to tune them:  
+```
+grid_params = {
+    'learning_rate_list': [0.02, 0.05, 0.1, 0.3],
+    'max_depth_list': [2, 3, 4],
+    'n_estimators_list': [100 ,200 ,300],
+    'colsample_bytree': [0.8 ,1]
+}
+```
