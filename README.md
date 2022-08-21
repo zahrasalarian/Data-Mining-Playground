@@ -35,13 +35,20 @@ In the next step, the [fashion_mnist](https://www.tensorflow.org/datasets/catalo
 
 ## Association Rules
 
+This mini-project contains the implementations of Association Rules extraction. The process consists of three main parameters:
+- Support: shows the popularity of an item according to the number of times it appears in transactions
+- Confidence: shows the probability of buying item y if item x is bought. x -> y
+- Lift
 
+The last one is calculated from the combination of the first two ones through the below equation:  
 
+![tf-idf equation](lift-equation.png?raw=true)  
 
+This project employs the Apriori algorithm to implement association rules using [mlxtend](https://github.com/rasbt/mlxtend) library.
 
 ## Clustering
 
-
-
+This project aims to cluster the [make_blobs](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_blobs.html) dataset using the K-means algorithm and elbow technique to find the best value for K. It also contains some complex clustering examples with illustrations. In the following, the DBSCAN algorithm is implemented, together with estimating the values for epsilon (for KNN) and MinPts.
 
 ## Diabetes Classifier
+
